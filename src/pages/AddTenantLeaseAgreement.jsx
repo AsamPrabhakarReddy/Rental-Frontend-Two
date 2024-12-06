@@ -22,7 +22,7 @@ const AddTenantLeaseAgreement = () => {
   const handleLeaseSubmit = async (values) => {
     try {
       const res = await axios.post(
-        `http://localhost:8080/api/v1/addTenantLeaseAgreement?landlordLeaseAgreementId=${landlordLeaseAgreementID}&propertyId=${propertyID}&tenantId=${customerID}`,
+        `https://rma1-backend-1.onrender.com/api/v1/addTenantLeaseAgreement?landlordLeaseAgreementId=${landlordLeaseAgreementID}&propertyId=${propertyID}&tenantId=${customerID}`,
         values,
         {
           headers: {
@@ -40,7 +40,9 @@ const AddTenantLeaseAgreement = () => {
         // Fetch tenant and landlord details
         const [tenantRes, landlordRes] = await Promise.all([
           axios.post(
-            `http://localhost:8080/api/v1/updateTenantDetailsInLandlordDashboard`,
+            // `http://localhost:8080/api/v1/updateTenantDetailsInLandlordDashboard`,
+            
+            `https://rma1-backend-1.onrender.com/api/v1/updateTenantDetailsInLandlordDashboard`,
             { propertyId: propertyID, tenantId: customerID },
             {
               headers: {
@@ -49,7 +51,9 @@ const AddTenantLeaseAgreement = () => {
             }
           ),
           axios.post(
-            `http://localhost:8080/api/v1/getLandlordDetailsInTenantDashboard`,
+            // `http://localhost:8080/api/v1/getLandlordDetailsInTenantDashboard`,
+            
+            `https://rma1-backend-1.onrender.com/api/v1/getLandlordDetailsInTenantDashboard`,
             { propertyId: propertyID },
             {
               headers: {

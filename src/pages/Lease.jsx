@@ -17,7 +17,9 @@ const Lease = () => {
   const getPropertyDetails = async () => {
     try {
       const response = await axios.post(
-        "http://localhost:8080/api/v1/getLeaseProperty",
+        // "http://localhost:8080/api/v1/getLeaseProperty",
+        
+        "https://rma1-backend-1.onrender.com/api/v1/getLeaseProperty",
         {
           propertyId: propertyID,
         }
