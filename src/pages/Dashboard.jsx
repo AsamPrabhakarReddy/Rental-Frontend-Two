@@ -14,18 +14,18 @@ const Dashboard = () => {
   const { user } = useSelector((state) => state.user);
   const params = useParams();
   const [customer, setCustomer] = useState(null);
+  const [roleName, setRoleName] = useState(null);
   const [properties, setProperties] = useState(null);
-  // const [tenantID, setTenantID] = useState(null);
+  const [allActiveProperties, setAllActiveProperties] = useState(null);
+
   const navigate = useNavigate();
+
 
   const getCustomerInfo = async () => {
     try {
       const response = await axios.post(
-        // "http://localhost:8080/api/v1/getUserData",
-        // https://rma1-backend-1.onrender.com
         "https://rma1-backend-1.onrender.com/api/v1/getUserData",
         { userId: user?._id },
-
         {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -36,33 +36,33 @@ const Dashboard = () => {
         setCustomer(response.data.data);
       }
     } catch (error) {
-      console.log(error);
+      console.error("Error in getCustomerInfo:", error.message);
       Swal.fire({
         icon: "error",
         title: "Oops...",
-        text: "Something went wrong!",
+        text: "Something went wrong while fetching customer info!",
       });
     }
   };
-
-  // Checking the user role for displaying dashboard
-
-  const [roleName, setRoleName] = useState()
+  
   useEffect(() => {
-    if (customer && customer.role) {
+    if (customer?.role) {
       setRoleName(customer.role);
-      // setTenantID(customer._id);
     }
   }, [customer]);
-
-  // console.log("tenant id:",user._id)
-// getting property details in landlord dashboard.
-
-  // const [leasePropertyId, setLeasePropertyId] = useState(null);
+  
+  useEffect(() => {
+    if (!roleName) return; // Ensure roleName is available before proceeding
+    if (roleName === "landlord") {
+      getProperties();
+    } else if (roleName === "tenant") {
+      getAllActiveProperties();
+    }
+  }, [roleName]);
+  
   const getProperties = async () => {
     try {
       const response = await axios.post(
-        // "http://localhost:8080/api/v1/getProperties",
         "https://rma1-backend-1.onrender.com/api/v1/getProperties",
         { userId: params.id },
         {
@@ -73,35 +73,21 @@ const Dashboard = () => {
       );
       if (response.data) {
         setProperties(response.data.data);
-        
       }
     } catch (error) {
-      console.log(error);
+      console.error("Error in getProperties:", error.message);
       Swal.fire({
         icon: "error",
         title: "Oops...",
-        text: "Something went wrong!",
+        text: "Failed to fetch properties!",
       });
     }
   };
-
-  useEffect(() => {
-    getCustomerInfo();
-
-    //eslint-disable-next-line
-  }, []);
-
- 
-console.log("properties log :: ", properties);
-
-  const [allActiveProperties, setAllActiveProperties] = useState(null);
-
+  
   const getAllActiveProperties = async () => {
     try {
       const response = await axios.get(
-        // "http://localhost:8080/api/v1/getAllActiveProperties",
         "https://rma1-backend-1.onrender.com/api/v1/getAllActiveProperties",
-        { userId: params.id },
         {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -109,30 +95,22 @@ console.log("properties log :: ", properties);
         }
       );
       if (response.data) {
-        console.log("tenant data", response.data)
         setAllActiveProperties(response.data.data);
-        console.log(allActiveProperties);
-        // console.log("agre id :", allActiveProperties.landlordLeaseAgreement);
       }
     } catch (error) {
-      console.log(error);
+      console.error("Error in getAllActiveProperties:", error.message);
       Swal.fire({
         icon: "error",
         title: "Oops...",
-        text: "Something went wrong!",
+        text: "Failed to fetch active properties!",
       });
     }
   };
-
+  
+  // Initial data load
   useEffect(() => {
-  if (roleName === "landlord") {
-    getProperties(); // Fetch properties for landlords
-  } else if (roleName === "tenant") {
-    getAllActiveProperties(); // Fetch active properties for tenants
-  }
-  // eslint-disable-next-line
-}, [roleName]);
- 
+    getCustomerInfo();
+  }, []);
 
   console.log("get all vacant with no repairs: ",allActiveProperties);
 
