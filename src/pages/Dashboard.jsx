@@ -23,7 +23,7 @@ const Dashboard = () => {
       const response = await axios.post(
         // "http://localhost:8080/api/v1/getUserData",
         // https://rma1-backend-1.onrender.com
-        "https://rma1-backend-1.onrender.comapi/v1/getUserData",
+        "https://rma1-backend-1.onrender.com/api/v1/getUserData",
         { userId: user?._id },
 
         {
