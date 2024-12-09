@@ -190,7 +190,7 @@ const Layout = ({ children }) => {
                           .map((property, index) => (
                             <ul key={property._id}>
                               <li
-                                className={`cursor-pointer flex items-center text-center text-gray-600 w-[100%] py-2 px-2 overflow-hidden h-[70px] rounded-lg ${
+                                className={`cursor-pointer flex items-center text-center text-gray-600 w-[100%] py-2 px-2 overflow-hidden h-[50px] rounded-lg ${
                                   index % 2 === 0 ? "bg-gray-600 text-white" : "bg-gray-400 text-white"
                                 }`}
                               >
