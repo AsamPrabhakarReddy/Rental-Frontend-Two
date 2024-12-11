@@ -38,61 +38,61 @@ const AddTenantLeaseAgreement = () => {
         });
 
         // Fetch tenant and landlord details
-        const [tenantRes, landlordRes] = await Promise.all([
-          axios.post(
-            // `http://localhost:8080/api/v1/updateTenantDetailsInLandlordDashboard`,
+      //   const [tenantRes, landlordRes] = await Promise.all([
+      //     axios.post(
+      //       // `http://localhost:8080/api/v1/updateTenantDetailsInLandlordDashboard`,
             
-            `https://rma1-backend-1.onrender.com/api/v1/updateTenantDetailsInLandlordDashboard`,
-            { propertyId: propertyID, tenantId: customerID },
-            {
-              headers: {
-                Authorization: `Bearer ${localStorage.getItem("token")}`,
-              },
-            }
-          ),
-          axios.post(
-            // `http://localhost:8080/api/v1/getLandlordDetailsInTenantDashboard`,
+      //       `https://rma1-backend-1.onrender.com/api/v1/updateTenantDetailsInLandlordDashboard`,
+      //       { propertyId: propertyID, tenantId: customerID },
+      //       {
+      //         headers: {
+      //           Authorization: `Bearer ${localStorage.getItem("token")}`,
+      //         },
+      //       }
+      //     ),
+      //     axios.post(
+      //       // `http://localhost:8080/api/v1/getLandlordDetailsInTenantDashboard`,
             
-            `https://rma1-backend-1.onrender.com/api/v1/getLandlordDetailsInTenantDashboard`,
-            { propertyId: propertyID },
-            {
-              headers: {
-                Authorization: `Bearer ${localStorage.getItem("token")}`,
-              },
-            }
-          ),
-        ]);
+      //       `https://rma1-backend-1.onrender.com/api/v1/getLandlordDetailsInTenantDashboard`,
+      //       { propertyId: propertyID },
+      //       {
+      //         headers: {
+      //           Authorization: `Bearer ${localStorage.getItem("token")}`,
+      //         },
+      //       }
+      //     ),
+      //   ]);
 
-        console.log("tenant details: ", tenantRes);
-        console.log("landlord details: ", landlordRes);
-        // Update context state method
+      //   console.log("tenant details: ", tenantRes);
+      //   console.log("landlord details: ", landlordRes);
+      //   // Update context state method
 
-        // setDetails((prevDetails) => ({
-        //   ...prevDetails,  // Spread previous state to keep other properties intact
-        //   tenantDetails: tenantRes.data,
-        //   landlordDetails: landlordRes.data,
-        // }));
+      //   // setDetails((prevDetails) => ({
+      //   //   ...prevDetails,  // Spread previous state to keep other properties intact
+      //   //   tenantDetails: tenantRes.data,
+      //   //   landlordDetails: landlordRes.data,
+      //   // }));
 
         
-      // local storage method
+      // // local storage method
 
-        // localStorage.setItem('tenantDetails', JSON.stringify(tenantRes.data));
-        // localStorage.setItem('landlordDetails', JSON.stringify(landlordRes.data));
+      //   // localStorage.setItem('tenantDetails', JSON.stringify(tenantRes.data));
+      //   // localStorage.setItem('landlordDetails', JSON.stringify(landlordRes.data));
       
-        // redux
+      //   // redux
 
-            // console.log("Dispatching tenant details:", tenantRes.data);
-            // dispatch(setTenantDetails(tenantRes.data));
-            // console.log("Dispatching landlord details:", landlordRes.data);
-            // dispatch(setLandlordDetails(landlordRes.data));
+      //       // console.log("Dispatching tenant details:", tenantRes.data);
+      //       // dispatch(setTenantDetails(tenantRes.data));
+      //       // console.log("Dispatching landlord details:", landlordRes.data);
+      //       // dispatch(setLandlordDetails(landlordRes.data));
 
-         console.log(tenantRes.data);
-         console.log(landlordRes.data);
+      //    console.log(tenantRes.data);
+      //    console.log(landlordRes.data);
       
 
-        // setTenantDetails(tenantRes);
+      //   // setTenantDetails(tenantRes);
 
-        console.log("in side state varible" , tenantDetails);
+      //   console.log("in side state varible" , tenantDetails);
 
         navigate(`/dashboard/${user?._id}`);
       } else {
