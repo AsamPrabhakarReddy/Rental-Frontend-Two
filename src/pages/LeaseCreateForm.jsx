@@ -2105,7 +2105,7 @@ const handleOptionChange = (option) => {
                          onClick={handleNext}
                         className="mt-6 bg-mainColor text-white p-2 w-[150px] rounded-lg"
                       >
-                        I Agree
+                        Next
                       </button>    
                     </div>
 
